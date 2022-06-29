@@ -78,12 +78,12 @@ function App() {
       return(
         <div className='event' key={activity.id}>
           <h3>Name: {activity.name}</h3>
-          <h3>Date: {activity.date}</h3>
-          <img src={activity.img} alt={activity.name}></img>
-          <h3>Description: {activity.description}</h3>
-          <h3>Location: {activity.location}</h3>
-          <h3>Price: {activity.price}</h3>
-          <h3>Notes: {activity.notes}</h3>
+          <h5>Date: {activity.date}</h5>
+          <img id='eventImg' src={activity.image} alt={activity.name}></img>
+          <h5>Description: {activity.description}</h5>
+          <h5>Location: {activity.location}</h5>
+          <h5>Price: {activity.price}</h5>
+          <h5>Notes: {activity.notes}</h5>
           <Edit handleUpdate={handleUpdate} activity={activity}/>
           <button onClick={() => {handleDelete(activity)}}>
           Delete

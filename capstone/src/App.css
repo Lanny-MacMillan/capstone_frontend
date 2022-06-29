@@ -17,3 +17,7 @@ body {
   border-radius: 35px;
   margin-bottom: 15px;
 }
+#eventImg {
+  width: 100%;
+  max-width: 320px;
+}
