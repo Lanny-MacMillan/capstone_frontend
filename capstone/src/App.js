@@ -129,7 +129,7 @@ function App() {
 
       <Button onClick={() => {handleDelete(activity)}}>
       Delete</Button>
-      <Edit handleUpdate={handleUpdate}/>
+      <Edit handleUpdate={handleUpdate} activity={activity}/>
       </div>
       )
       })}
