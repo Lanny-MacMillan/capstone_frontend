@@ -1,4 +1,4 @@
-import {useState, useEffect} from'react'
+import {useState, useEffect, Link} from'react'
 import axios from 'axios'
 import Button from '@mui/material/Button';
 
@@ -9,8 +9,15 @@ const Home = (props) => {
     const [activities, setActivities] = useState([])
     const [showActivities, setShowActivities] = useState(true)
     const [showActivity, setShowActivity] = useState(false)
-
+    // console.log(props.activity)
     const [activity, setActivity] = useState({...props.activity})
+    const [name, setName] = useState({})
+    const [date, setDate] = useState({})
+    const [description, setDescription] = useState({})
+    const [image, setImage] = useState({})
+    const [location, setLocation] = useState({})
+    const [price, setPrice] = useState({})
+    const [notes, setNotes] = useState({})
 
     const googleURL = `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_API_KEY}&q=`
     const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
@@ -99,78 +106,76 @@ const Home = (props) => {
                 {activities.map((activity) => {
                 return(
                 <div class="showContainer">
-                <div class="showImg">
-                <img className="single-page-image" src={activity.image} alt={activity.name} id='showImg'></img>
-                </div>
+                    <div class="showImg">
+                        <img className="single-page-image" src={activity.image} alt={activity.name} id='showImg'></img>
+                    </div>
                 <div class="description">
-                <h1 class='showHeader'>{activity.name}</h1>
-                <h5>{activity.description}</h5>
+                    <h1 class='showHeader'>{activity.name}</h1>
+                    <h5>{activity.description}</h5>
                 </div>
                 <div class="stats">
-                <h2> Some Stuff goes here</h2>
-                <h5>${activity.price}.00</h5>
-                <h5>{activity.notes}</h5>
+                    <h2> Some Stuff goes here</h2>
+                    <h5>${activity.price}.00</h5>
+                    <h5>{activity.notes}</h5>
                 </div>
                 <div class="mapsApi">
                 <h5>{activity.location}</h5>
             {/*============= GOOGLE MAPS API =============*/}
-                <iframe
+                {/* <iframe
                     className="map"
                     width='100%'
                     height='100%'
                     loading='lazy'
                     src={`${googleURL} + ${activity.location}`}>
-                </iframe>
+                </iframe> */}
             {/*============= GOOGLE MAPS API =============*/}
-            </div>
+                </div>
+
             <Button onClick={() => {handleDelete(activity)}}>
             Delete</Button>
-            <Button onClick={() => {handleEdit(activity)}}>
-            Edit</Button>
-            <details>
-            <summary>Edit Activity</summary>
-            <form onSubmit={handleSubmit}>
+            {/* <Button onClick={() => {handleEdit(activity)}}>
+            Edit</Button> */}
+            {/* <details> */}
+            {/* <summary>Edit Activity</summary>
+            <form onSubmit={props.handleSubmit}>
                     <label htmlFor="name">Name: </label><br/>
                     <input type="text" name="name" value={activity.name}
-                    onChange={handleChange}/>
+                    onChange={handleNameChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="date">Date: </label><br/>
                     <input type="text" name="date" value={activity.date}
-                    onChange={handleChange}/>
+                    onChange={handleDateChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="description">Description: </label><br/>
                     <input type="text" name="description" value={activity.description}
-                    onChange={handleChange}/>
+                    onChange={handleDescriptionChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="image">Image: </label><br/>
                     <input type="text" name="image" value={activity.image}
-                    onChange={handleChange}/>
+                    onChange={handleImageChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="location">Location: </label><br/>
                     <input type="text" name="location" value={activity.location}
-                    onChange={handleChange}/>
+                    onChange={handleLocationChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="price">Price: </label><br/>
                     <input type="number" name="price" value={activity.price}
-                    onChange={handleChange}/>
+                    onChange={handlePriceChange}/>
                     <br/>
                     <br/>
                     <label htmlFor="notes">Notes: </label><br/>
                     <input type="text" name="notes" value={activity.notes}
-                    onChange={handleChange}/>
+                    onChange={handleNotesChange}/>
                     <br/>
                     <input type="submit"/>
-                
-                
-                
             
-            </form> 
-            </details>
+            </form>  */}
+            {/* </details> */}
             </div>
             )
             })}
@@ -179,7 +184,6 @@ const Home = (props) => {
         )
     }
 
-    
     const homePage = () => {
         getActivities()
         setShowActivities(true)
@@ -191,8 +195,26 @@ const Home = (props) => {
         setActivities(activities.filter(activity => activity.id == selectedActivity.id))
     }
     
-    const handleChange = (event) => {
-        setActivity({...activity, [event.target.name]: event.target.value})
+    const handleNameChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handleDateChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handleDescriptionChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handleImageChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handleLocationChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handlePriceChange = (event) => {
+        setName({[event.target.name]: event.target.value})
+    }
+    const handleNotesChange = (event) => {
+        setName({[event.target.name]: event.target.value})
     }
 
     const handleSubmit = (event) => {
