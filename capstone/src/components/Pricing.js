@@ -1,8 +1,14 @@
-const Pricing = () => {
 
+
+
+
+
+
+const Pricing = () => {
     return (
         <>
-        <h1>Pricing</h1>
+        <h1>Currency Converter</h1>
+
         </>
     )
 }

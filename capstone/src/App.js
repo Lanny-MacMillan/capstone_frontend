@@ -161,7 +161,6 @@ const hideAll = () => {
     <ResponsiveAppBar hideAll={hideAll}/>
     <Routes>
         <Route path='/' element={<Home 
-
                                   Edit={Edit}
                                   handleUpdate={handleUpdate}
                                   handleSubmit={handleSubmit}

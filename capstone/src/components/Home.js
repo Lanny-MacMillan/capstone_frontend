@@ -214,6 +214,7 @@ const Home = (props) => {
     }
     
     const handleChange = (event) => {
+        console.log(event.target.value)
         setActivity({...activity, [event.target.name]: event.target.value})
     }
     // const handleSubmit = (event) => {

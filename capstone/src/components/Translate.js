@@ -2,6 +2,8 @@ import {useState,useEffect} from 'react';
 import axios from 'axios';
 import '../App.css';
 import Button from '@mui/material/Button';
+import { useSpeechSynthesis } from 'react-speech-kit';
+
 
 
 function Translate() {
@@ -11,7 +13,8 @@ function Translate() {
     const [input,setInput]=useState("");
     const [output,setOutput]=useState("");
 
-
+    //=============== TEXT TO SPEECH ============================
+    const { speak } = useSpeechSynthesis();
 
     const translate=()=>{
         const params=new URLSearchParams();
@@ -25,13 +28,13 @@ function Translate() {
         headers:{'accept':'application/json',
             'Content-Type':'application/x-www-form-urlencoded'},
             }).then(res=>{
-        console.log(res.data)
+        // console.log(res.data)
         setOutput(res.data.translatedText)
         })
     };
     useEffect(() => {
         axios.get("https://libretranslate.de/languages",{headers:{'accept':'application/json'}}).then(res=>{
-        console.log(res)
+        // console.log(res)
         setOptions(res.data)
         })
 
@@ -60,11 +63,15 @@ function Translate() {
         </div>
         <br/>
         <div>
-        <textarea cols='50' rows='8' value={output}></textarea>
+        <textarea cols='50' rows='8' value={output}
+
+        ></textarea>
+        
         </div>
         <br/>
         <div>
         <Button variant="contained" onClick={e=>translate()}>Translate</Button>
+        <Button variant="contained"  onClick={() => speak({ text: output })}>Speech</Button>
         </div>
 
         </div>
