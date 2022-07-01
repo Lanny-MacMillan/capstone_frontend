@@ -24,7 +24,7 @@ function App() {
   const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
   // const APIBaseURL = 'http://localhost:8000/api/events'
 
-
+// =================================== CRUD ===============================
   const getActivities = () => {
     axios
         .get(APIBaseURL)
@@ -76,6 +76,8 @@ function App() {
   const handleChange = (event) => {
     setActivity({...activity, [event.target.name]: event.target.value})
 }
+// ================================ UNUSED =================================
+
   const DisplayAll = () => {
     return (
         <>
@@ -148,17 +150,19 @@ function App() {
     setActivities(activities.filter(activity => activity.id == selectedActivity.id))
 }
 
-const hideAll = () => {
+  const hideAll = () => {
   setShowActivities(false)
   setShowActivity(false)
-}
+  }
+// ==========================================================================
+
   useEffect(() => {
     getActivities()
   }, [])
 
   return (
     <>
-    <ResponsiveAppBar hideAll={hideAll}/>
+    <ResponsiveAppBar/>
     <Routes>
         <Route path='/' element={<Home 
                                   Edit={Edit}
@@ -167,7 +171,6 @@ const hideAll = () => {
                                   handleChange={handleChange}
                                   />} />
         <Route path='Add' element={<Add 
-                                    hideAll={hideAll}
                                     activities={activities}
                                     handleCreate={handleCreate}
                                     />} />
@@ -177,30 +180,6 @@ const hideAll = () => {
     </Routes>
     {/* {showActivities ? <DisplayAll/> : null}
     {showActivity ? <DisplayOne/> : null}      */}
-
-
-
-    {/* <h1 id='title'>Events</h1>
-    <div className='container'>
-    {activities.map((activity) => {
-      return(
-        <div className='event' key={activity.id}>
-          <h3>Name: {activity.name}</h3>
-          <h5>Date: {activity.date}</h5>
-          <img id='eventImg' src={activity.image} alt={activity.name}></img>
-          <h5>Description: {activity.description}</h5>
-          <h5>Location: {activity.location}</h5>
-          <h5>Price: {activity.price}</h5>
-          <h5>Notes: {activity.notes}</h5>
-          <Edit handleUpdate={handleUpdate} activity={activity}/>
-          <button onClick={() => {handleDelete(activity)}}>
-          Delete
-          </button>
-        </div> 
-      )
-    })}
-    </div> */}
-
     </>
   );
 }

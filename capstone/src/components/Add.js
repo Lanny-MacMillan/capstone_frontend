@@ -46,7 +46,7 @@ const Add = (props) => {
                 <br/>
                 <br/>
                 <label htmlFor="description">Description: </label><br/>
-                <input type="text" name="description" value={activity.description}
+                <input cols='50' rows='8' type="text" name="description" value={activity.description}
                 onChange={handleChange}/>
                 <br/>
                 <br/>

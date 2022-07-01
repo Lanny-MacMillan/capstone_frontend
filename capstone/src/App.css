@@ -7,6 +7,22 @@ body {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.localMapContainer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+}
+.localContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  box-shadow: 5px 5px 5px 5px rgb(28, 29, 48);
+  margin: 15px;
+  align-items: center;
+}
 .translate {
   flex-grow:inherit;
   display: flex;

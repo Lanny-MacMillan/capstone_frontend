@@ -62,8 +62,6 @@ const Home = (props) => {
     const DisplayAll = () => {
         return (
             <>
-            <h1>Home</h1>
-
         <div className='container'>
             {activities.map((activity) => {
             return(
@@ -278,6 +276,7 @@ const Home = (props) => {
     }, [])
     return (
         <>
+        <h1>Vacation Events</h1>
         {showActivities ? <DisplayAll/> : null}
         {showActivity ? <DisplayOne/> : null}     
         </>
