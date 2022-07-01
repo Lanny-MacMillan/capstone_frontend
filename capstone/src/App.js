@@ -12,12 +12,14 @@ import { Route, Routes} from "react-router";
 import ResponsiveAppBar from './components/NavBar';
 import Button from '@mui/material/Button';
 
-
 function App() {
   const [activities, setActivities] = useState([])
   const [activity, setActivity] = useState({})
   const [showActivities, setShowActivities] = useState(true)
   const [showActivity, setShowActivity] = useState(false)
+
+
+  const googleURL = `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_API_KEY}&q=`
 
   const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
   // const APIBaseURL = 'http://localhost:8000/api/events'
@@ -50,6 +52,7 @@ function App() {
     // getActivities()
 }
   const handleUpdate =(editActivity) => {
+    console.log('before .put App.js')
     axios   
     // id updates ID in DB, editActivity brings the info from that function
       .put(APIBaseURL + '/' + editActivity.id, editActivity)
@@ -70,7 +73,9 @@ function App() {
         // getActivities()
     })
   }
-
+  const handleChange = (event) => {
+    setActivity({...activity, [event.target.name]: event.target.value})
+}
   const DisplayAll = () => {
     return (
         <>
@@ -83,11 +88,11 @@ function App() {
             <h3>Name: {activity.name}</h3>
             <h5>Date: {activity.date}</h5>
             <img id='eventImg' src={activity.image} alt={activity.name}></img>
-            <h5>Description: {activity.description}</h5>
+            {/* <h5>Description: {activity.description}</h5> */}
             <h5>Location: {activity.location}</h5>
             <h5>Price: {activity.price}</h5>
-            <h5>Notes: {activity.notes}</h5>
-            <a href='#' onClick={() => {showPage(activity)}} class="btn btn-link" role="button">Expand</a>
+            {/* <h5>Notes: {activity.notes}</h5> */}
+            <a href='#' onClick={() => {showPage(activity)}} className="btn btn-dark" role="button">Expand</a>
             </div> 
         )
         })}
@@ -98,32 +103,32 @@ function App() {
   const DisplayOne = () => {
   return (
   <>
-      <div class='container'>
+      <div className='container'>
           {activities.map((activity) => {
           return(
-          <div class="showContainer">
-              <div class="showImg">
+          <div className="showContainer" key={activity.id}>
+              <div className="showImg">
                   <img className="single-page-image" src={activity.image} alt={activity.name} id='showImg'></img>
               </div>
-          <div class="description">
-              <h1 class='showHeader'>{activity.name}</h1>
+          <div className="description">
+              <h1 className='showHeader'>{activity.name}</h1>
               <h5>{activity.description}</h5>
           </div>
-          <div class="stats">
+          <div className="stats">
               <h2> Some Stuff goes here</h2>
               <h5>${activity.price}.00</h5>
               <h5>{activity.notes}</h5>
           </div>
-          <div class="mapsApi">
+          <div className="mapsApi">
           <h5>{activity.location}</h5>
       {/*============= GOOGLE MAPS API =============*/}
-          {/* <iframe
+          <iframe
               className="map"
               width='100%'
               height='100%'
               loading='lazy'
               src={`${googleURL} + ${activity.location}`}>
-          </iframe> */}
+          </iframe>
       {/*============= GOOGLE MAPS API =============*/}
           </div>
 
@@ -142,6 +147,7 @@ function App() {
     setShowActivity(true)
     setActivities(activities.filter(activity => activity.id == selectedActivity.id))
 }
+
 const hideAll = () => {
   setShowActivities(false)
   setShowActivity(false)
@@ -152,25 +158,26 @@ const hideAll = () => {
 
   return (
     <>
-    <ResponsiveAppBar />
+    <ResponsiveAppBar hideAll={hideAll}/>
     <Routes>
-        {/* <Route path='/' element={<Home 
+        <Route path='/' element={<Home 
+
                                   Edit={Edit}
                                   handleUpdate={handleUpdate}
-                                  handleSubmit={handleSubmit}/>} /> */}
+                                  handleSubmit={handleSubmit}
+                                  handleChange={handleChange}
+                                  />} />
         <Route path='Add' element={<Add 
+                                    hideAll={hideAll}
+                                    activities={activities}
                                     handleCreate={handleCreate}
                                     />} />
-        <Route path='Translate' element={<Translate />} 
-
-
-        />
+        <Route path='Translate' element={<Translate />} />
         <Route path='LocalInfo' element={<LocalInfo />} />
         <Route path='Pricing' element={<Pricing />} />
-        <Route path='{activity.id}'  />
     </Routes>
-    {showActivities ? <DisplayAll/> : null}
-    {showActivity ? <DisplayOne/> : null}     
+    {/* {showActivities ? <DisplayAll/> : null}
+    {showActivity ? <DisplayOne/> : null}      */}
 
 
 

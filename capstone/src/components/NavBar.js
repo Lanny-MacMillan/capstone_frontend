@@ -17,7 +17,7 @@ import {Link} from 'react-router-dom';
 const pages = ['Add', 'LocalInfo', 'Pricing', 'Translate'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-const ResponsiveAppBar = () => {
+const ResponsiveAppBar = (props) => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 

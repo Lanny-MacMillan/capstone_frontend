@@ -6,6 +6,8 @@ import { useFormControl } from '@mui/material/FormControl';
 
 const Add = (props) => {
     let emptyActivity = {name: '', date: '', description: '', image: '', location: '', price: '', notes:''}
+    
+
 
     const [activity, setActivity] = useState(emptyActivity)
     const navigate = useNavigate();
@@ -15,7 +17,6 @@ const Add = (props) => {
     }
     const handleSubmitAddMore = (event) => {
         event.preventDefault()
-        console.log('check below')
         console.log(activity)
         props.handleCreate(activity)
         setActivity({name: '', date: '', description: '', image: '', location: '', price: '', notes:''})
@@ -23,7 +24,6 @@ const Add = (props) => {
     }
     const handleSubmitExit = (event) => {
         event.preventDefault()
-        console.log('check below')
         console.log(activity)
         props.handleCreate(activity)
         setActivity({name: '', date: '', description: '', image: '', location: '', price: '', notes:''})
@@ -31,6 +31,7 @@ const Add = (props) => {
     }
     return (
         <>
+        
         <div className='container'>
             <form onSubmit={handleSubmitExit}>
                 {/* htmlFor creates a loop */}

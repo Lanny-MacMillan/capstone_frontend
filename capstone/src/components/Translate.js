@@ -37,6 +37,10 @@ function Translate() {
 
     })
     return (
+        <>
+        <div className='container'>
+        <h2>Translator will yield the best results with short, direct sentences.</h2>
+        </div>
         <div className="translate">
         <div>
         From ({from}):
@@ -64,6 +68,7 @@ function Translate() {
         </div>
 
         </div>
+        </>
     );
 }
 

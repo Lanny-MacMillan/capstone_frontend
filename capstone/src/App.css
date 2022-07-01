@@ -20,8 +20,8 @@ body {
   /* background: rgb(140, 226, 125); */
   box-shadow: 5px 5px 5px 5px rgb(28, 29, 48);
   width: 300px;
-  height: 810px;
-  border-radius: 35px;
+  height: 450px;
+  /* border-radius: 35px; */
   margin-bottom: 15px;
 }
 #eventImg {
