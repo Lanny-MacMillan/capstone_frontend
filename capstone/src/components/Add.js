@@ -1,24 +1,39 @@
 import {useState} from 'react'
+import Button from '@mui/material/Button';
+import { useNavigate } from 'react-router-dom';
+import '../App.css';
+import { useFormControl } from '@mui/material/FormControl';
 
 const Add = (props) => {
     let emptyActivity = {name: '', date: '', description: '', image: '', location: '', price: '', notes:''}
+    
+
 
     const [activity, setActivity] = useState(emptyActivity)
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         setActivity({...activity, [event.target.name]: event.target.value})
     }
-    const handleSubmit = (event) => {
+    const handleSubmitAddMore = (event) => {
         event.preventDefault()
-        console.log('check below')
         console.log(activity)
         props.handleCreate(activity)
         setActivity({name: '', date: '', description: '', image: '', location: '', price: '', notes:''})
-        console.log('here')
+
+    }
+    const handleSubmitExit = (event) => {
+        event.preventDefault()
+        console.log(activity)
+        props.handleCreate(activity)
+        setActivity({name: '', date: '', description: '', image: '', location: '', price: '', notes:''})
+        navigate(-1)
     }
     return (
         <>
-            <form onSubmit={handleSubmit}>
+        
+        <div className='container'>
+            <form onSubmit={handleSubmitExit}>
                 {/* htmlFor creates a loop */}
                 <label htmlFor="name">Name: </label><br/>
                 <input type="text" name="name" value={activity.name}
@@ -31,7 +46,7 @@ const Add = (props) => {
                 <br/>
                 <br/>
                 <label htmlFor="description">Description: </label><br/>
-                <input type="text" name="description" value={activity.description}
+                <input cols='50' rows='8' type="text" name="description" value={activity.description}
                 onChange={handleChange}/>
                 <br/>
                 <br/>
@@ -54,8 +69,10 @@ const Add = (props) => {
                 <input type="text" name="notes" value={activity.notes}
                 onChange={handleChange}/>
                 <br/>
-                <input type="submit"/>
+                <Button id='Button' type="submit" variant="contained">Save and Exit</Button><br/>
+                <Button id='Button' onClick={handleSubmitAddMore} type="submit" variant="contained">Save and Add Next</Button>
             </form>
+            </div>
         </>
     )
 }

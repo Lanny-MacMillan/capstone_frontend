@@ -2,20 +2,25 @@ import './App.css';
 import {useState, useEffect} from'react'
 import axios from 'axios'
 import Add from './components/Add'
-import Edit from './components/Edit'
+import Home from './components/Home'
+import Translate from './components/Translate'
+import Pricing from './components/Pricing'
+import LocalInfo from './components/LocalInfo'
+import Profile from './components/Profile'
+import Account from './components/Account'
+import Dashboard from './components/Dashboard'
+import Logout from './components/Logout'
 import * as React from 'react';
-import Button from '@mui/material/Button';
-
-
-
+import { Route, Routes} from "react-router";
+import ResponsiveAppBar from './components/NavBar';
 
 function App() {
   const [activities, setActivities] = useState([])
+  const [activity, setActivity] = useState({})
 
   const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
-  // const APIBaseURL = 'http://localhost:8000/api/events'
 
-
+// =================================== CRUD ===============================
   const getActivities = () => {
     axios
         .get(APIBaseURL)
@@ -24,7 +29,6 @@ function App() {
         )
         .catch((error)=> console.error(error))
   }
-
   const handleCreate = (addActivity) => {
     axios
       .post(APIBaseURL, addActivity)
@@ -36,9 +40,15 @@ function App() {
         // getActivities()
       }
       )
-      
   }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    // console.log(activity.name)
+    handleUpdate(activity)
+    // getActivities()
+}
   const handleUpdate =(editActivity) => {
+    console.log('before .put App.js')
     axios   
     // id updates ID in DB, editActivity brings the info from that function
       .put(APIBaseURL + '/' + editActivity.id, editActivity)
@@ -50,49 +60,37 @@ function App() {
         // getActivities()
     })
   }
-  const handleDelete = (deletedActivity) => {
-    axios
-      .delete(APIBaseURL + '/' + deletedActivity.id)
-      .then((response) => {
-        // Instead of pulling data and reloading this filters the data on page and removes the {deletedActivity.id}
-        setActivities(activities.filter(activity => activity.id !== deletedActivity.id))
-        // getActivities()
-    })
-  }
-
-
+  const handleChange = (event) => {
+    setActivity({...activity, [event.target.name]: event.target.value})
+}
 
   useEffect(() => {
     getActivities()
   }, [])
 
-
-
   return (
     <>
-    <h1 id='title'>Events</h1>
-    <Button variant="contained">Hello World</Button>
-    <Add handleCreate={handleCreate}/><br/>
-    <div className='container'>
-    {activities.map((activity) => {
-      return(
-        <div className='event' key={activity.id}>
-          <h3>Name: {activity.name}</h3>
-          <h5>Date: {activity.date}</h5>
-          <img id='eventImg' src={activity.image} alt={activity.name}></img>
-          <h5>Description: {activity.description}</h5>
-          <h5>Location: {activity.location}</h5>
-          <h5>Price: {activity.price}</h5>
-          <h5>Notes: {activity.notes}</h5>
-          <Edit handleUpdate={handleUpdate} activity={activity}/>
-          <button onClick={() => {handleDelete(activity)}}>
-          Delete
-          </button>
-        </div> 
-      )
-    })}
-    </div>
-
+    <ResponsiveAppBar/>
+    <Routes>
+        <Route path='/' element={<Home 
+                                  handleUpdate={handleUpdate}
+                                  handleSubmit={handleSubmit}
+                                  handleChange={handleChange}
+                                  />} />
+        <Route path='Add' element={<Add 
+                                    activities={activities}
+                                    handleCreate={handleCreate}
+                                    />} />
+        <Route path='Translate' element={<Translate />} />
+        <Route path='LocalInfo' element={<LocalInfo 
+                                          activities={activities}
+                                          />} />
+        <Route path='Pricing' element={<Pricing />} />
+        <Route path='Profile' element={<Profile />} />
+        <Route path='Account' element={<Account />} />
+        <Route path='Dashboard' element={<Dashboard />} />
+        <Route path='Logout' element={<Logout />} />
+    </Routes>
     </>
   );
 }
