@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import {Link} from 'react-router-dom';
+import FlightOutlinedIcon from '@mui/icons-material/FlightOutlined';
 
 const pages = ['Add', 'LocalInfo', 'Pricing', 'Translate'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -40,7 +41,7 @@ const ResponsiveAppBar = (props) => {
     <AppBar position="sticky">
         <Container maxWidth="xl">
             <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <FlightOutlinedIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
                 variant="h6"
                 noWrap
@@ -152,7 +153,9 @@ const ResponsiveAppBar = (props) => {
                 >
                 {settings.map((setting) => (
                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">
+                        <Link style={{textdecoration: 'none', color: 'black'}} to={`/${setting}`}>{setting}</Link>
+                    </Typography>
                     </MenuItem>
                 ))}
                 </Menu>

@@ -8,10 +8,10 @@ import { useSpeechSynthesis } from 'react-speech-kit';
 
 function Translate() {
     const[options,setOptions]=useState([])
-    const [to,setTo]=useState("en");
-    const [from,setFrom]=useState("en");
-    const [input,setInput]=useState("");
-    const [output,setOutput]=useState("");
+    const [to, setTo]=useState("en");
+    const [from, setFrom]=useState("en");
+    const [input, setInput]=useState("");
+    const [output, setOutput]=useState("");
 
     //=============== TEXT TO SPEECH ============================
     const { speak } = useSpeechSynthesis();
