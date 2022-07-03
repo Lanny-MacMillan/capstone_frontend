@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const Edit = (props) => {
     const [activity, setActivity] = useState({...props.activity})
@@ -26,43 +27,80 @@ const Edit = (props) => {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name: </label><br/>
-                <input type="text" name="name" value={activity.name}
-                onChange={handleChange}/>
+            <form>
+        <TextField
+            style={{ width: "200px", margin: "5px", align: 'center'}}
+            type="text"
+            label="Name"
+            variant="outlined"
+            name="name" 
+            value={activity.name}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Date"
+            variant="outlined"
+            name="date" 
+            value={activity.date}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Description"
+            variant="outlined"
+            name="description" 
+            value={activity.description}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Image"
+            variant="outlined"
+            name="image" 
+            value={activity.image}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Location"
+            variant="outlined"
+            name="location" 
+            value={activity.location}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="number"
+            label="Price"
+            variant="outlined"
+            name="price" 
+            value={activity.price}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Notes"
+            variant="outlined"
+            name="notes" 
+            value={activity.notes}
+            onChange={handleChange}
+        />
+        <br />
+        <Button id='Button' onClick={handleSubmit} data-bs-dismiss="modal" type="submit" variant="contained">Save and Exit</Button><br/>
 
-                <br/>
-                <label htmlFor="date">Date: </label><br/>
-                <input type="text" name="date" value={activity.date}
-                onChange={handleChange}/>
-
-                <br/>
-                <label htmlFor="description">Description: </label><br/>
-                <input type="text" name="description" value={activity.description}
-                onChange={handleChange}/>
-
-                <br/>
-                <label htmlFor="image">Image: </label><br/>
-                <input type="text" name="image" value={activity.image}
-                onChange={handleChange}/>
-
-                <br/>
-                <label htmlFor="location">Location: </label><br/>
-                <input type="text" name="location" value={activity.location}
-                onChange={handleChange}/>
-
-                <br/>
-                <label htmlFor="price">Price: </label><br/>
-                <input type="number" name="price" value={activity.price}
-                onChange={handleChange}/>
-
-                <br/>
-                <label htmlFor="notes">Notes: </label><br/>
-                <input type="text" name="notes" value={activity.notes}
-                onChange={handleChange}/>
-                <br/>
-                <input type="submit" class="btn btn-dark" data-bs-dismiss="modal"/>
-            </form>
+        </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

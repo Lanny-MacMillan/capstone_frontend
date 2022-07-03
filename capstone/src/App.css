@@ -1,6 +1,9 @@
 body {
   background: rgb(190, 190, 190);
 }
+h1 {
+  text-align: center;
+}
 .container {
   display: flex;
   flex-direction: row;

@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Skeleton from '@mui/material/Skeleton';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = (props) => {
@@ -21,6 +22,7 @@ const Home = (props) => {
     const [showActivity, setShowActivity] = useState(false)
     const [activity, setActivity] = useState([])
     const { loading = false } = props;
+    const navigate = useNavigate();
 
     const googleURL = `https://www.google.com/maps/embed/v1/search?key=${process.env.REACT_APP_API_KEY}&q=`
     const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
@@ -176,6 +178,7 @@ const Home = (props) => {
                 </div>
                 </div>
                 <Edit handleUpdate={handleUpdate} activity={activity}/>
+                <Button id='Button' variant="contained" onClick={() => {backOption()}} className="btn btn-link" role="button">Back</Button>
 
             </div>
             )
@@ -185,7 +188,10 @@ const Home = (props) => {
         </>
         )
     }
-
+    const backOption = () => {
+        navigate(-1)
+        
+    }
     const homePage = () => {
         getActivities()
         setShowActivities(true)

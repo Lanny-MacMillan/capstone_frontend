@@ -2,7 +2,9 @@ import {useState} from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
-import { useFormControl } from '@mui/material/FormControl';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+
 
 const Add = (props) => {
     let emptyActivity = {name: '', date: '', description: '', image: '', location: '', price: '', notes:''}
@@ -32,47 +34,86 @@ const Add = (props) => {
     return (
         <>
         
-        <div className='container'>
-            <form onSubmit={handleSubmitExit}>
-                {/* htmlFor creates a loop */}
-                <label htmlFor="name">Name: </label><br/>
-                <input type="text" name="name" value={activity.name}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="date">Date: </label><br/>
-                <input type="text" name="date" value={activity.date}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="description">Description: </label><br/>
-                <input cols='50' rows='8' type="text" name="description" value={activity.description}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="image">Image: </label><br/>
-                <input type="text" name="image" value={activity.image}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="location">Location: </label><br/>
-                <input type="text" name="location" value={activity.location}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="price">Price: </label><br/>
-                <input type="number" name="price" value={activity.price}
-                onChange={handleChange}/>
-                <br/>
-                <br/>
-                <label htmlFor="notes">Notes: </label><br/>
-                <input type="text" name="notes" value={activity.notes}
-                onChange={handleChange}/>
-                <br/>
-                <Button id='Button' type="submit" variant="contained">Save and Exit</Button><br/>
-                <Button id='Button' onClick={handleSubmitAddMore} type="submit" variant="contained">Save and Add Next</Button>
-            </form>
-            </div>
+
+    <Typography variant="h4">Add New Event</Typography>
+    <div className="container">
+    <form>
+        <TextField
+            style={{ width: "200px", margin: "5px", align: 'center'}}
+            type="text"
+            label="Name"
+            variant="outlined"
+            name="name" 
+            value={activity.name}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Date"
+            variant="outlined"
+            name="date" 
+            value={activity.date}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Description"
+            variant="outlined"
+            name="description" 
+            value={activity.description}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Image"
+            variant="outlined"
+            name="image" 
+            value={activity.image}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Location"
+            variant="outlined"
+            name="location" 
+            value={activity.location}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="number"
+            label="Price"
+            variant="outlined"
+            name="price" 
+            value={activity.price}
+            onChange={handleChange}
+        />
+        <br />
+        <TextField
+            style={{ width: "200px", margin: "5px" }}
+            type="text"
+            label="Notes"
+            variant="outlined"
+            name="notes" 
+            value={activity.notes}
+            onChange={handleChange}
+        />
+        <br />
+        <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Save and Exit</Button><br/>
+        <Button id='Button' onClick={handleSubmitAddMore} type="submit" variant="contained">Save and Add Next</Button>
+
+</form>
+        </div>
+
         </>
     )
 }
