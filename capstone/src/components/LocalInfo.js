@@ -10,8 +10,6 @@ import Fuse from 'fuse.js'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-// import Button from '@mui/material/Button';
-// import TextField from '@mui/material/TextField';
 const axios = require("axios");
 
 
@@ -26,40 +24,40 @@ const LocalInfo = (props) => {
 
 {/* ============================= SEARCH BAR ============================= */}
 
-function handleOnSearch({ currentTarget = {} })  {
-    const { value } = currentTarget;
-    setQuery(value)
-}
-const fuse = new Fuse(news, {
-    keys: [
-        'title',
-        'author',
-        'summary',
-        'published_date'
-    ],
-    includeScore: true
-})
-const handleClear = () => {
-    setQuery('')
-}
-const results = fuse.search(query)
-const newsResults = query ? results.map(result => result.item) : news
+    function handleOnSearch({ currentTarget = {} })  {
+        const { value } = currentTarget;
+        setQuery(value)
+    }
+    const fuse = new Fuse(news, {
+        keys: [
+            'title',
+            'author',
+            'summary',
+            'published_date'
+        ],
+        includeScore: true
+    })
+    const handleClear = () => {
+        setQuery('')
+    }
+    const results = fuse.search(query)
+    const newsResults = query ? results.map(result => result.item) : news
 
-function handleOnSearch({ currentTarget = {} })  {
-    const { value } = currentTarget;
-    setQuery(value)
-}
-const Search = () => {
-    return (
-        <>
-        <form class="d-flex">
-            <input class="form-control me-2" type='text' placeholder="Search News" value={query} id='query' onChange={handleOnSearch}/>
-            <button class="btn btn-outline-success" type="submit" onChange={handleOnSearch}>Search</button>
-        </form>
-        </>
-    )
-}
-{/* ============================= SEARCH BAR ============================= */}
+    function handleOnSearch({ currentTarget = {} })  {
+        const { value } = currentTarget;
+        setQuery(value)
+    }
+    const Search = () => {
+        return (
+            <>
+            <form className="d-flex">
+                <input className="form-control me-2" type='text' placeholder="Search News" value={query} id='query' onChange={handleOnSearch}/>
+                <button className="btn btn-outline-success" type="submit" onChange={handleOnSearch}>Search</button>
+            </form>
+            </>
+        )
+    }
+{/* ===================================================================== */}
 
     const getNews= () => {
         axios
@@ -73,6 +71,7 @@ const Search = () => {
         });
         
     }
+
     console.log(props.activities[0].location)
 
     const options = {
@@ -87,7 +86,8 @@ const Search = () => {
             'X-RapidAPI-Key': '4e0e7d2a56msh62686108837c30cp15097ejsn8e5d3e6f2a27',
             'X-RapidAPI-Host': 'free-news.p.rapidapi.com'
         }
-    };
+    }
+
     const DisplayAll = () => {
         return (
             <>
@@ -95,7 +95,7 @@ const Search = () => {
             <div className='localMapContainer'>
             {newsResults.map((article) => {
             return(
-                <Card sx={{ maxWidth: 700, m:4 }} key={article._id}>
+                <Card sx={{ maxWidth: 350, m:4 }} key={article._id}>
                 <CardMedia
                     component="img"
                     height="240"
@@ -107,11 +107,11 @@ const Search = () => {
                     {article.title}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                    {article.summary}
+                    {/* {article.summary} */}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Share</Button>
+                    {/* <Button size="small">Share</Button> */}
                     <Button id='Button' variant="contained" onClick={() => {showPage(article)}} className="btn btn-link" role="button">Learn More</Button>
 
                 </CardActions>
@@ -130,7 +130,7 @@ const Search = () => {
             <div className='localMapContainer'>
             {newsResults.map((article) => {
             return(
-                <Card sx={{ maxWidth: 700, m:4 }} key={article._id}>
+            <Card sx={{ maxWidth: 700, m:4 }} key={article._id}>
                 <CardMedia
                     component="img"
                     height="240"
@@ -144,9 +144,10 @@ const Search = () => {
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                     {article.summary}<br/>
-                    {article.link}<br/>
                     {article.published_date}<br/>
                     {article.twitter_account}<br/>
+                    <br/>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Click for full article</button>
                     </Typography>
                 </CardContent>
                 <CardActions>
@@ -154,35 +155,61 @@ const Search = () => {
                     <Button size="small">Share</Button>
 
                 </CardActions>
-                </Card>
-                // <div className='localContainer' key={article.id}>
-                // <h3>{article.title}</h3>
-                // <h5>{article.author}</h5>
-                // <h5>{article.link}</h5>
-                // <img id='eventImg' src={article.media} alt={article.name}></img>
-                // <h5>{article.link}</h5>
-                // <h5>{article.published_date}</h5>
-                // <h5>{article.summary}</h5>
-                // <h5>{article.twitter_account}</h5>
-                // </div> 
+                <div className="modal-dialog">
+                    <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-fullscreen">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
 
+                                <div className="modal-body">
+                                    <iframe  className="iFrame" src={article.link}>
+                                    </iframe>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" className="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Card>
             )
             })}
         </div>
         </>
         )
     }
+    // const embedNews = () => {
+    //     return (
+    //         <>
+    //         <div class="row">
+    //             <iframe class="col-lg-12 col-md-12 col-8" src={article.link}>
+    //             </iframe>
+    //         </div>
+    //         </>
+    //     )
+    // }
     const backOption = () => {
-        navigate(-1)
+        setShowNews(true)
+        setShowArticle(false)
+        getNews()
+        // navigate(-1)
     }
+
     const showPage = (selectedArticle) => {
         setShowNews(false)
         setShowArticle(true)
         setNews(news.filter(article => article._id == selectedArticle._id))
     }
+
     useEffect(() => {
         getNews()
     }, [])
+
     return (
         <>
         <h1>Local News</h1>
@@ -213,3 +240,4 @@ const Search = () => {
 }
 
 export default LocalInfo
+
