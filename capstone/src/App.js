@@ -13,10 +13,39 @@ import Logout from './components/Logout'
 import * as React from 'react';
 import { Route, Routes} from "react-router";
 import ResponsiveAppBar from './components/NavBar';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { Switch } from "antd";
+import ReactSwitch from 'react-switch'
 
-function App() {
+
+function App(props) {
   const [activities, setActivities] = useState([])
   const [activity, setActivity] = useState({})
+  const [toggle, setToggle] = useState(true)
+  const [theme, setTheme] = useState('DarkTheme')
+
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
+  }
+  const themeChange = () => {
+    // 👇️ passed function to setState
+    setTheme(current => !current);
+  };
+  const DarkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+  const LightTheme = createTheme({
+    palette: {
+      mode: 'light',
+    },
+  });
+  const themes = {
+    light: LightTheme,
+    dark: DarkTheme,
+  }
+// =================================== USER AUTH ===============================
 
   const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
 
@@ -70,7 +99,12 @@ function App() {
 
   return (
     <>
+    <ThemeProvider theme={DarkTheme}>
+
     <ResponsiveAppBar/>
+    {/* <button onClick={toggleTheme}>Change view mode</button> */}
+
+    <>
     <Routes>
         <Route path='/' element={<Home 
                                   handleUpdate={handleUpdate}
@@ -91,6 +125,8 @@ function App() {
         <Route path='Dashboard' element={<Dashboard />} />
         <Route path='Logout' element={<Logout />} />
     </Routes>
+    </>
+    </ThemeProvider>
     </>
   );
 }
