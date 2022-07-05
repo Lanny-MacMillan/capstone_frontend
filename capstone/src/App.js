@@ -15,28 +15,36 @@ import { Route, Routes} from "react-router";
 import ResponsiveAppBar from './components/NavBar';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Switch } from "antd";
-
+import ReactSwitch from 'react-switch'
 
 
 function App(props) {
   const [activities, setActivities] = useState([])
   const [activity, setActivity] = useState({})
-  const [toggle, setToggle] = useState(false)
+  const [toggle, setToggle] = useState(true)
+  const [theme, setTheme] = useState('DarkTheme')
 
-  const toggler = () => {
-    toggle ? setToggle(false): setToggle(true)
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === 'light' ? 'dark' : 'light'))
   }
-  const darkTheme = createTheme({
+  const themeChange = () => {
+    // 👇️ passed function to setState
+    setTheme(current => !current);
+  };
+  const DarkTheme = createTheme({
     palette: {
       mode: 'dark',
     },
   });
-  const lightTheme = createTheme({
+  const LightTheme = createTheme({
     palette: {
       mode: 'light',
     },
   });
-  
+  const themes = {
+    light: LightTheme,
+    dark: DarkTheme,
+  }
 // =================================== USER AUTH ===============================
 
   const APIBaseURL = 'https://glacial-tor-04352.herokuapp.com/api/events'
@@ -91,14 +99,11 @@ function App(props) {
 
   return (
     <>
-    <Switch defaultChecked />
-    <br />
-    <Switch size="small" defaultChecked />
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={DarkTheme}>
 
-    <ResponsiveAppBar Switch={Switch}/>
+    <ResponsiveAppBar/>
+    {/* <button onClick={toggleTheme}>Change view mode</button> */}
 
-    {/* {props.userLogIn ?  */}
     <>
     <Routes>
         <Route path='/' element={<Home 
@@ -121,7 +126,6 @@ function App(props) {
         <Route path='Logout' element={<Logout />} />
     </Routes>
     </>
-    {/* : <Dashboard/>} */}
     </ThemeProvider>
     </>
   );

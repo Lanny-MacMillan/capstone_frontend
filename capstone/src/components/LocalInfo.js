@@ -67,19 +67,20 @@ const LocalInfo = (props) => {
             console.log(response.data.articles);
         })
         .catch(function (error) {
-            // console.error(error);
+            console.log(error)
+            console.error(error);
         });
         
     }
-
+    console.log(news)
     console.log(props.activities[0].location)
 
     const options = {
         method: 'GET',
         url: 'https://free-news.p.rapidapi.com/v1/search',
         params: {
-            q: (props.activities[0].location), 
-            // q: 'boston, us', 
+            // q: (props.activities[0].location), 
+            q: 'Venice, Italy', 
             lang: 'en'
         },
         headers: {
@@ -95,7 +96,7 @@ const LocalInfo = (props) => {
             <div className='localMapContainer'>
             {newsResults.map((article) => {
             return(
-                <Card sx={{ maxWidth: 350, m:4 }} key={article._id}>
+                <Card sx={{ maxWidth: 550, m:4 }} key={article._id}>
                 <CardMedia
                     component="img"
                     height="240"
