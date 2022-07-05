@@ -73,14 +73,14 @@ const Search = () => {
         });
         
     }
-    console.log(props.activities[0].location)
+    // console.log(props.activities[0].location)
 
     const options = {
         method: 'GET',
         url: 'https://free-news.p.rapidapi.com/v1/search',
         params: {
-            q: (props.activities[0].location), 
-            // q: 'boston, us', 
+            // q: (props.activities[0].location), 
+            q: 'Venice, Italy', 
             lang: 'en'
         },
         headers: {
