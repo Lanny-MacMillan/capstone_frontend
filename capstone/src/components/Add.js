@@ -39,7 +39,7 @@ const Add = (props) => {
     <div className="container">
     <form>
         <TextField
-            style={{ width: "200px", margin: "5px", align: 'center'}}
+            style={{ width: "400px", margin: "5px", align: 'center'}}
             type="text"
             label="Name"
             variant="outlined"
@@ -49,7 +49,7 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Date"
             variant="outlined"
@@ -59,7 +59,11 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
+            id="full-width-text-field"
+            multiline
+            rows={5}
+            maxRows={10}
             type="text"
             label="Description"
             variant="outlined"
@@ -69,7 +73,7 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Image"
             variant="outlined"
@@ -79,7 +83,7 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Location"
             variant="outlined"
@@ -89,7 +93,7 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="number"
             label="Price"
             variant="outlined"
@@ -99,7 +103,10 @@ const Add = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
+            multiline
+            rows={5}
+            maxRows={10}
             type="text"
             label="Notes"
             variant="outlined"
@@ -108,10 +115,10 @@ const Add = (props) => {
             onChange={handleChange}
         />
         <br />
-        <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Save and Exit</Button><br/>
+        <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Save and Exit</Button>
         <Button id='Button' onClick={handleSubmitAddMore} type="submit" variant="contained">Save and Add Next</Button>
 
-</form>
+    </form>
         </div>
 
         </>

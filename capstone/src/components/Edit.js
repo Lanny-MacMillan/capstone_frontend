@@ -15,8 +15,8 @@ const Edit = (props) => {
     }
     return (
         <>
-        <Button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Edit Modal
+        <Button id='Button' type="button" variant="contained" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Edit Activity
         </Button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -29,7 +29,7 @@ const Edit = (props) => {
             <div class="modal-body">
             <form>
         <TextField
-            style={{ width: "200px", margin: "5px", align: 'center'}}
+            style={{ width: "400px", margin: "5px", align: 'center'}}
             type="text"
             label="Name"
             variant="outlined"
@@ -39,7 +39,7 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Date"
             variant="outlined"
@@ -49,7 +49,11 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
+            id="full-width-text-field"
+            multiline
+            rows={5}
+            maxRows={10}
             type="text"
             label="Description"
             variant="outlined"
@@ -59,7 +63,7 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Image"
             variant="outlined"
@@ -69,7 +73,7 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="text"
             label="Location"
             variant="outlined"
@@ -79,7 +83,7 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
             type="number"
             label="Price"
             variant="outlined"
@@ -89,7 +93,10 @@ const Edit = (props) => {
         />
         <br />
         <TextField
-            style={{ width: "200px", margin: "5px" }}
+            style={{ width: "400px", margin: "5px" }}
+            multiline
+            rows={5}
+            maxRows={10}
             type="text"
             label="Notes"
             variant="outlined"
@@ -98,12 +105,14 @@ const Edit = (props) => {
             onChange={handleChange}
         />
         <br />
-        <Button id='Button' onClick={handleSubmit} data-bs-dismiss="modal" type="submit" variant="contained">Save and Exit</Button><br/>
+        {/* <Button id='Button' onClick={handleSubmit} data-bs-dismiss="modal" type="submit" variant="contained">Save and Exit</Button><br/> */}
 
-        </form>
-            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <Button id='Button' onClick={handleSubmit} data-bs-dismiss="modal" type="submit" variant="contained">Save and Exit</Button><br/>
+
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+            </form>
             </div>
             </div>
         </div>
