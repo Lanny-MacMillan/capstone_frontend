@@ -72,12 +72,7 @@ const LocalInfo = (props) => {
         });
         
     }
-<<<<<<< HEAD
     // console.log(props.activities[0].location)
-=======
-    console.log(news)
-    console.log(props.activities[0].location)
->>>>>>> 8b49598c5c63a7487b65b6caa06e9b00c3f250e8
 
     const options = {
         method: 'GET',

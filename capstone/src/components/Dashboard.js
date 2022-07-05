@@ -13,7 +13,7 @@ const Dashboard = (props) => {
     const [userLogIn, setUserLogIn] = useState(false)
     const [currentUser, setCurrentUser] = useState([])
 
-    const BASE_URL = 'http://localhost:8000/api/'
+    const BASE_URL = 'https://glacial-tor-04352.herokuapp.com/api/'
 
     let emptyUser = {email: '', password: ''}
     const [user, setUser] = useState(emptyUser)
@@ -69,7 +69,8 @@ const Dashboard = (props) => {
         console.log('attempting to return user login')
         console.log(userAccount)
         axios
-            .put('http://localhost:8000/api/useraccount/login', userAccount)
+            .put(BASE_URL + 'useraccount/login', userAccount)
+            // .put('http://localhost:8000/api/useraccount/login', userAccount)
             .catch((error) => {
                 if (error) {
                     console.log(".catch error")
