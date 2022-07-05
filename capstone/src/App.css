@@ -64,7 +64,9 @@ iframe {
 #Button {
   margin: 5px;
 }
-
+#Switch {
+  size: 55px;
+}
 /* ====================== SHOW PAGE ======================== */
 
 .showContainer {  display: grid;

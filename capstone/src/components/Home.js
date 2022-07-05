@@ -178,7 +178,7 @@ const Home = (props) => {
                 </div>
                 </div>
                 <Edit handleUpdate={handleUpdate} activity={activity}/>
-                <Button id='Button' variant="contained" onClick={() => {backOption()}} className="btn btn-link" role="button">Back</Button>
+                <Button id='Button' variant="contained" onClick={() => {homePage()}} className="btn btn-link" role="button">Back</Button>
 
             </div>
             )

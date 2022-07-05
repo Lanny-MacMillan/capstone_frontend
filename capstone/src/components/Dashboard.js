@@ -4,9 +4,11 @@ import Button from '@mui/material/Button';
 import '../App.css';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import Home from '../components/Home'
 
 
-const Dashboard = () => {
+
+const Dashboard = (props) => {
     const [users, setUsers] = useState([])
     const [userLogIn, setUserLogIn] = useState(false)
     const [currentUser, setCurrentUser] = useState([])
@@ -14,26 +16,30 @@ const Dashboard = () => {
     const BASE_URL = 'http://localhost:8000/api/'
 
     let emptyUser = {email: '', password: ''}
-    
-
-
     const [user, setUser] = useState(emptyUser)
+
+
+
+    const [userSignIn, setUserSignIn] = useState({...props.userSignIn})
 
     const handleChange = (event) => {
         setUser({...user, [event.target.name]: event.target.value})
-    }
-    // const handleSubmitAddMore = (event) => {
-    //     event.preventDefault()
-    //     console.log(user)
-    //     createUser(user)
-    //     setUser({email: '', password: ''})
+        setUserSignIn({...userSignIn, [event.target.name]: event.target.value})
 
+    }
+    // const handleChangeLogIn = (event) => {
+    //     setUserSignIn({...userSignIn, [event.target.name]: event.target.value})
     // }
     const handleSubmitExit = (event) => {
         event.preventDefault()
         console.log(user)
         createUser(user)
         setUser({email: '', password: ''})
+    }
+    const handleSubmitLogin = (event) => {
+        event.preventDefault()
+        console.log(userSignIn)
+        handleUserLogin(userSignIn)
     }
 
     //========READ USER==============
@@ -47,12 +53,14 @@ const Dashboard = () => {
             .catch((error) => console.error(error))
         console.log(users)
     }
+
     //======== CREATE USER ==============
     const createUser = (addUser) => {
+        console.log(addUser)
         axios
             .post(BASE_URL + 'useraccount', addUser)
             .then((response) => {
-                setUsers([...user, addUser])
+                setUsers([...users, addUser])
                 // setView('login')
             })
     }
@@ -61,18 +69,19 @@ const Dashboard = () => {
         console.log('attempting to return user login')
         console.log(userAccount)
         axios
-            .put(BASE_URL + 'useraccount/login', userAccount)
+            .put('http://localhost:8000/api/useraccount/login', userAccount)
             .catch((error) => {
                 if (error) {
                     console.log(".catch error")
                     console.log(error)
-                    setUserLogIn(false)                }
+                    setUserLogIn(false)
+                }
             })
             .then((response) => {
                 if (response == undefined){
                     console.log("undefined - no match")
                     console.log(response)
-                    setUserLogIn(true)
+                    setUserLogIn(false)
                 } else  {
                     console.log("match")
                     setUserLogIn(true)
@@ -80,75 +89,50 @@ const Dashboard = () => {
             })
     }
 
-    const handleUserLogin1 = (userAccount) => {
-        axios.put(BASE_URL + 'useraccount/login' , userAccount)
-        .then((response) => {
-            if (response.data.email == null) {
-                alert('Username and Password Do Not Match')
-            } else {
-                setUser(response.data)
-                axios
-                .get(BASE_URL + 'useraccount/' + response.data.id).then((response) => {
-                setCurrentUser(response.data)
-                })
-            setUserLogIn(true)
-            console.log(response.data)
-        
-            }
-        })
-    }
     // //============== LOGIN FORM ==============
 
-    // const Login = () => {
-    //     return(
-    //         <>
-    //         <div className='container'> 
-    //             {users.map((user) => {
-    //             return(
-    //                 <>
-    //                 <div className='container' key={user.id}>
-    //                     <h6>User Email = {user.email}</h6>
-    //                     <h6>User Password = {user.password}</h6>
-    //                 </div>
-    //                 </>
-    //             )
-    //             })}
-    //         </div>
-    //         <Typography variant="h4">Add New Event</Typography>
-    //         <div className="container">
-    //     <form>
-    //         <TextField
-    //             style={{ width: "400px", margin: "5px", align: 'center'}}
-    //             type="text"
-    //             label="Email"
-    //             variant="outlined"
-    //             name="email" 
-    //             value={user.email}
-    //             onChange={() => {handleChange()}}
-    //         />
-    //         <br />
-    //         <TextField
-    //             style={{ width: "400px", margin: "5px" }}
-    //             type="text"
-    //             label="Password"
-    //             variant="outlined"
-    //             name="password" 
-    //             value={user.password}
-    //             onChange={handleChange}
-    //         />
-    //         <br />
-    //         <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Create Account</Button>
-    //         <Button id='Button' onClick={handleUserLogin} type="submit" variant="contained">Login</Button><br/>
+    const Login = () => {
+        return(
+            <>
+            <div className="container">
 
-    //     </form>
-    //         </div>
-    //         </>
-    //     )
-    // }
+<form>
+    <TextField
+        style={{ width: "400px", margin: "5px", align: 'center'}}
+        type="text"
+        label="Email"
+        variant="outlined"
+        name="email" 
+        value={user.email}
+        onChange={handleChange}
+    />
+    <br />
+    <TextField
+        style={{ width: "400px", margin: "5px" }}
+        type="text"
+        label="Password"
+        variant="outlined"
+        name="password" 
+        value={user.password}
+        onChange={handleChange}
+    />
+    <br />
+    <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Create Account</Button>
+    <Button id='Button' onClick={handleSubmitLogin} type="submit" variant="contained">Login</Button>
+
+
+</form>
+    </div>
+            </>
+        )
+    }
     const UserPage = () => {
         return (
             <>
             <h1>User page goes here</h1>
+            <h1> ID: {user.id}</h1>
+            <h1> Email: {user.email}</h1>
+            <h1> Password: {user.password}</h1>
             </>
         )
     }
@@ -157,25 +141,10 @@ const Dashboard = () => {
         }, [])
 
     return (
+        <>    
+        {userLogIn ? <Home/> : 
         <>
-    Dashboard
-    {/* <div className='container'> 
-                {users.map((user) => {
-                return(
-                    <>
-                    <div className='container' key={user.id}>
-                        <h6>User Email = {user.email}</h6>
-                        <h6>User Password = {user.password}</h6>
-                    </div>
-                    </>
-                )
-                })}
-            </div> */}
-
-            
-        {userLogIn ? <UserPage/> : 
-        <>
-        <Typography variant="h4">Login Page</Typography>
+        <Typography variant="h4">Login</Typography>
             <div className="container">
 
         <form>
@@ -200,11 +169,12 @@ const Dashboard = () => {
             />
             <br />
             <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Create Account</Button>
-            <Button id='Button' onClick={handleUserLogin} type="submit" variant="contained">Login</Button><br/>
+            <Button id='Button' onClick={handleSubmitLogin} type="submit" variant="contained">Login</Button>
+
 
         </form>
             </div>
-        
+
         </>
         
         

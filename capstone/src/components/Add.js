@@ -115,7 +115,7 @@ const Add = (props) => {
             onChange={handleChange}
         />
         <br />
-        <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Save and Exit</Button><br/>
+        <Button id='Button' onClick={handleSubmitExit} type="submit" variant="contained">Save and Exit</Button>
         <Button id='Button' onClick={handleSubmitAddMore} type="submit" variant="contained">Save and Add Next</Button>
 
     </form>
